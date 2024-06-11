@@ -1,4 +1,4 @@
-import { Header } from "@/src/components/header";
+import { Header } from "@/components/header";
 
 type Props = {
   children: React.ReactNode;
