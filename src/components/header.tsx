@@ -1,9 +1,9 @@
 "use client";
 
 import { ClerkLoaded, ClerkLoading, UserButton } from "@clerk/nextjs";
+import { Loader2 } from "lucide-react";
 import { HeaderLogo } from "./headerLogo";
 import { Navigation } from "./navigation";
-import { Loader2 } from "lucide-react";
 import { WelcomeMsg } from "./welcomeMsg";
 
 export const Header = () => {

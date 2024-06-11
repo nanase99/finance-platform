@@ -1,17 +1,17 @@
+import { Menu } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
-import { NavButton } from "./ui/navButton";
 import { useState } from "react";
 import { useMedia } from "react-use";
-import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { Button } from "./ui/button";
-import { Menu } from "lucide-react";
+import { NavButton } from "./ui/navButton";
+import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 
 const routes = [
   { href: "/", label: "Overview" },
   { href: "/transactions", label: "Transactions" },
   { href: "/accounts", label: "Accounts" },
   { href: "/categories", label: "Categories" },
-  { href: "/settings", label: "Settings" },
+  { href: "/settings", label: "Settings" }
 ];
 
 export const Navigation = () => {
