@@ -6,23 +6,31 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true,
       "style": {
         "useSelfClosingElements": "off",
-        "noNonNullAssertion": "off"
+        "noNonNullAssertion": "off",
+        "noUselessElse": "off"
       }
     }
   },
   "formatter": {
     "enabled": true,
-    "indentStyle": "space"
+    "indentStyle": "space",
+    "formatWithErrors": true
   },
   "json": {
     "parser": {
       "allowComments": true
     },
     "formatter": {
-      "indentStyle": "space"
+      "indentStyle": "space",
+      "trailingCommas": "none"
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "semicolons": "always",
+      "trailingComma": "none"
     }
   }
 }
