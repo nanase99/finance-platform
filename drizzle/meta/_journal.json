@@ -15,6 +15,13 @@
       "when": 1717975055299,
       "tag": "0001_thankful_shocker",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1719047116846,
+      "tag": "0002_cheerful_catseye",
+      "breakpoints": true
     }
   ]
 }

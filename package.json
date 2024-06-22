@@ -9,7 +9,7 @@
     "lint": "biome lint --apply src",
     "format": "biome format --write src",
     "check": "biome check --apply-unsafe src",
-    "db:generate": "drizzle-kit generate:pg --schema db/schema.ts --out ./drizzle",
+    "db:generate": "drizzle-kit generate:pg --schema src/db/schema.ts --out ./drizzle",
     "db:migrate": "bun ./scripts/migrate.ts",
     "db:studio": "drizzle-kit studio --config=./drizzle.config.ts"
   },
