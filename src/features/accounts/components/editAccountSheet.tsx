@@ -1,3 +1,6 @@
+import { Loader2 } from "lucide-react";
+import type { z } from "zod";
+
 import {
   Sheet,
   SheetContent,
@@ -6,13 +9,11 @@ import {
   SheetTitle
 } from "@/components/ui/sheet";
 import { insertAccountSchema } from "@/db/schema";
+import { useDeleteAccount } from "@/features/accounts/api/useDeleteAccount";
+import { useEditAccount } from "@/features/accounts/api/useEditAccount";
+import { useGetAccount } from "@/features/accounts/api/useGetAccount";
+import { useOpenAccount } from "@/features/accounts/hooks/useOpenAccount";
 import { useConfirm } from "@/hooks/useConfirm";
-import { Loader2 } from "lucide-react";
-import type { z } from "zod";
-import { useDeleteAccount } from "../accounts/api/useDeleteAccount";
-import { useEditAccount } from "../accounts/api/useEditAccount";
-import { useGetAccount } from "../accounts/api/useGetAccount";
-import { useOpenAccount } from "../accounts/hooks/useOpenAccount";
 import { AccountForm } from "./accountForm";
 
 const formSchema = insertAccountSchema.pick({ name: true });
@@ -27,7 +28,7 @@ export const EditAccountSheet = () => {
 
   const [ConfirmDialog, confirm] = useConfirm(
     "Are you sure?",
-    "You are about to delete this transaction"
+    "You are about to delete this account"
   );
 
   const isPending = editMutation.isPending || deleteMutation.isPending;

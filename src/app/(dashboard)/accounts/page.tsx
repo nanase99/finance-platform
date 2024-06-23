@@ -7,13 +7,13 @@ import { Loader2, Plus } from "lucide-react";
 
 import { DataTable } from "@/components/dataTable";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useBulkDeleteAccount } from "@/features/accounts/api/useBulkDelete";
+import { useBulkDeleteAccounts } from "@/features/accounts/api/useBulkDeleteAccounts";
 import { useGetAccounts } from "@/features/accounts/api/useGetAccounts";
 import { columns } from "./column";
 
 const AccountsPage = () => {
   const newAccount = useNewAccount();
-  const deleteAccounts = useBulkDeleteAccount();
+  const deleteAccounts = useBulkDeleteAccounts();
   const accountsQuery = useGetAccounts();
   const accounts = accountsQuery.data || [];
 
@@ -50,7 +50,7 @@ const AccountsPage = () => {
           <DataTable
             columns={columns}
             data={accounts}
-            filterKey="email"
+            filterKey="name"
             onDelete={(row) => {
               const ids = row.map((r) => r.original.id);
               deleteAccounts.mutate({ ids });

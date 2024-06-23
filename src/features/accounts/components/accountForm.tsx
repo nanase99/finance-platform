@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { insertAccountSchema } from "@/db/schema";
-import { useConfirm } from "@/hooks/useConfirm";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Trash } from "lucide-react";
 import { useForm } from "react-hook-form";
