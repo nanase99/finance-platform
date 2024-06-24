@@ -1,5 +1,5 @@
 {
-  "version": "5",
+  "version": "3",
   "dialect": "pg",
   "entries": [
     {
@@ -21,6 +21,13 @@
       "version": "5",
       "when": 1719047116846,
       "tag": "0002_cheerful_catseye",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1719186433654,
+      "tag": "0003_flippant_pride",
       "breakpoints": true
     }
   ]
