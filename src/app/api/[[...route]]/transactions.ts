@@ -7,7 +7,7 @@ import { db } from "@/db/drizzle";
 import {
   accounts,
   categories,
-  insertTransactionsSchema,
+  insertTransactionSchema,
   transactions
 } from "@/db/schema";
 import { clerkMiddleware, getAuth } from "@hono/clerk-auth";
@@ -110,7 +110,7 @@ const app = new Hono()
   .post(
     "/",
     clerkMiddleware(),
-    zValidator("json", insertTransactionsSchema.omit({ id: true })),
+    zValidator("json", insertTransactionSchema.omit({ id: true })),
     async (c) => {
       const auth = getAuth(c);
       if (!auth?.userId) return c.json({ error: "Unauthorized" }, 401);
@@ -130,7 +130,7 @@ const app = new Hono()
   .post(
     "/bulk-create",
     clerkMiddleware(),
-    zValidator("json", z.array(insertTransactionsSchema.omit({ id: true }))),
+    zValidator("json", z.array(insertTransactionSchema.omit({ id: true }))),
     async (c) => {
       const auth = getAuth(c);
       const values = c.req.valid("json");
@@ -192,7 +192,7 @@ const app = new Hono()
     "/:id",
     clerkMiddleware(),
     zValidator("param", z.object({ id: z.string().optional() })),
-    zValidator("json", insertTransactionsSchema.pick({ id: true })),
+    zValidator("json", insertTransactionSchema.pick({ id: true })),
     async (c) => {
       const auth = getAuth(c);
       const { id } = c.req.valid("param");
