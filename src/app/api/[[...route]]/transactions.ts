@@ -192,7 +192,7 @@ const app = new Hono()
     "/:id",
     clerkMiddleware(),
     zValidator("param", z.object({ id: z.string().optional() })),
-    zValidator("json", insertTransactionSchema.pick({ id: true })),
+    zValidator("json", insertTransactionSchema.omit({ id: true })),
     async (c) => {
       const auth = getAuth(c);
       const { id } = c.req.valid("param");
@@ -211,12 +211,7 @@ const app = new Hono()
           .select({ id: transactions.id })
           .from(transactions)
           .innerJoin(accounts, eq(transactions.accountId, accounts.id))
-          .where(
-            and(
-              eq(transactions.id, values.id),
-              eq(accounts.userId, auth.userId)
-            )
-          )
+          .where(and(eq(transactions.id, id), eq(accounts.userId, auth.userId)))
       );
 
       const [data] = await db

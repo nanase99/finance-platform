@@ -12,3 +12,11 @@ export function convertAmountFromMilliunits(amount: number) {
 export function convertAmountToMilliunits(amount: number) {
   return Math.round(amount * 1000);
 }
+
+export function formatCurrency(value: number) {
+  return Intl.NumberFormat("ja-JP", {
+    style: "currency",
+    currency: "JPY",
+    minimumFractionDigits: 2
+  }).format(value);
+}
