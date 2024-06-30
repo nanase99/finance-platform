@@ -10,6 +10,10 @@
         "useSelfClosingElements": "off",
         "noNonNullAssertion": "off",
         "noUselessElse": "off"
+      },
+      "suspicious": {
+        "noExplicitAny": "off",
+        "noArrayIndexKey": "off"
       }
     }
   },
