@@ -1,17 +1,45 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useNewTransaction } from "@/features/transactions/hooks/useNewTransaction";
-import { Loader2, Plus } from "lucide-react";
+import { Loader2, Plus, Variable } from "lucide-react";
+import { useState } from "react";
 
 import { DataTable } from "@/components/dataTable";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+
 import { useBulkDeleteTransactions } from "@/features/transactions/api/useBulkDeleteTransactions";
 import { useGetTransactions } from "@/features/transactions/api/useGetTransactions";
+import { useNewTransaction } from "@/features/transactions/hooks/useNewTransaction";
+
 import { columns } from "./column";
+import { ImportCard } from "./importCard";
+import { UploadButton } from "./uploadButton";
+
+enum VARIANTS {
+  LIST = "LIST",
+  IMPORT = "IMPORT"
+}
+
+const INITIAL_IMPORT_RESULTS = {
+  data: [],
+  errors: [],
+  meta: {}
+};
 
 const TransactionsPage = () => {
+  const [variant, setVariant] = useState<VARIANTS>(VARIANTS.LIST);
+  const [importResults, setImportResults] = useState(INITIAL_IMPORT_RESULTS);
+
+  const handleUpload = (results: typeof INITIAL_IMPORT_RESULTS) => {
+    setImportResults(results);
+    setVariant(VARIANTS.IMPORT);
+  };
+  const handleCancelUpload = () => {
+    setImportResults(INITIAL_IMPORT_RESULTS);
+    setVariant(VARIANTS.LIST);
+  };
+
   const newTransaction = useNewTransaction();
   const deleteTransactions = useBulkDeleteTransactions();
   const transactionsQuery = useGetTransactions();
@@ -36,6 +64,16 @@ const TransactionsPage = () => {
     );
   }
 
+  if (variant === VARIANTS.IMPORT) {
+    return (
+      <ImportCard
+        data={importResults.data}
+        onCancel={handleCancelUpload}
+        onSubmit={handleUpload}
+      />
+    );
+  }
+
   return (
     <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24">
       <Card className="border-none drop-shadow-sm">
@@ -43,10 +81,17 @@ const TransactionsPage = () => {
           <CardTitle className="text-xl line-clamp-1">
             Transaction history
           </CardTitle>
-          <Button size="sm" onClick={newTransaction.onOpen}>
-            <Plus className="size-4 mr-2" />
-            Add new
-          </Button>
+          <div className="flex flex-col lg:flex-row gap-y-2 items-center gap-x-2">
+            <Button
+              size="sm"
+              onClick={newTransaction.onOpen}
+              className="w-full lg:w-auto"
+            >
+              <Plus className="size-4 mr-2" />
+              Add new
+            </Button>
+            <UploadButton onUpload={handleUpload} />
+          </div>
         </CardHeader>
         <CardContent>
           <DataTable
