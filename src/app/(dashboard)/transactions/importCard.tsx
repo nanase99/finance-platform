@@ -32,10 +32,14 @@ export const ImportCard = ({ data, onCancel, onSubmit }: Props) => {
     columnIndex: number,
     value: string | null
   ) => {
-    if (value === "skip") return;
     if (Object.values(selectedColumns).includes(value)) return;
 
     setSelectedColumns((prev) => {
+      if (value === "skip") {
+        const current = { ...prev };
+        delete current[columnIndex.toString()];
+        return current;
+      }
       return { ...prev, [columnIndex.toString()]: value };
     });
   };
