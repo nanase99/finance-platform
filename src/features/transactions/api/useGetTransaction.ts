@@ -1,4 +1,5 @@
 import { client } from "@/lib/hono";
+import { convertAmountFromMilliunits } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 
 export const useGetTransaction = (id?: string) => {
@@ -13,7 +14,7 @@ export const useGetTransaction = (id?: string) => {
       if (!response.ok) throw new Error("Failed to fetch transaction");
 
       const { data } = await response.json();
-      return data;
+      return { ...data, amount: convertAmountFromMilliunits(data.amount) };
     }
   });
 
